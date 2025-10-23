@@ -26,22 +26,4 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-const optionalAuth = async (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (token) {
-    try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-jwt-secret');
-      const user = await User.findByPk(decoded.userId, {
-        attributes: { exclude: ['password'] }
-      });
-      req.user = user;
-    } catch (error) {
-      // Token inválido, mas a rota continua
-    }
-  }
-  next();
-};
-
-module.exports = { authenticateToken, optionalAuth };
+module.exports = { authenticateToken };

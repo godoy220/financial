@@ -14,33 +14,21 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [csrfToken, setCsrfToken] = useState('');
 
-  // Get CSRF token
-  const getCsrfToken = async () => {
-    try {
-      const response = await axios.get('/api/csrf-token', { withCredentials: true });
-      setCsrfToken(response.data.csrfToken);
-      axios.defaults.headers.common['X-CSRF-Token'] = response.data.csrfToken;
-    } catch (error) {
-      console.error('Erro ao obter token CSRF:', error);
-    }
-  };
-
-  // Configure axios defaults
+  // Configure axios
   useEffect(() => {
-    axios.defaults.baseURL = 'http://localhost:5000';
-    axios.defaults.withCredentials = true;
-    getCsrfToken();
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
   }, []);
 
-  // Check if user is authenticated
+  // Check authentication on mount
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           const response = await axios.get('/api/auth/me');
           setUser(response.data.user);
         }
@@ -110,8 +98,7 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    loading,
-    csrfToken
+    loading
   };
 
   return (

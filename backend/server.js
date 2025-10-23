@@ -78,6 +78,37 @@ const PORT = process.env.PORT || 5000;
 // Iniciar servidor
 sequelize.sync({ force: false })
   .then(() => {
+    // --- Seed categorias pré-definidas (apenas se a tabela estiver vazia) ---
+    const { Category } = require('./models');
+
+    async function seedDefaultCategories() {
+      try {
+        const count = await Category.count();
+        if (count === 0) {
+          const defaults = [
+            { name: 'Salário', type: 'income', color: '#2ecc71' },
+            { name: 'Investimentos', type: 'income', color: '#27ae60' },
+            { name: 'Presente', type: 'income', color: '#16a085' },
+            { name: 'Alimentação', type: 'expense', color: '#e74c3c' },
+            { name: 'Transporte', type: 'expense', color: '#c0392b' },
+            { name: 'Lazer', type: 'expense', color: '#9b59b6' },
+            { name: 'Contas', type: 'expense', color: '#34495e' },
+            { name: 'Saúde', type: 'expense', color: '#e67e22' },
+            { name: 'Educação', type: 'expense', color: '#f39c12' }
+          ];
+          await Category.bulkCreate(defaults);
+          console.log('🔰 Categorias padrão semeadas.');
+        } else {
+          console.log('🔎 Categorias já existem, seed ignorado.');
+        }
+      } catch (err) {
+        console.error('Erro ao semear categorias:', err);
+      }
+    }
+
+    // --- Chamar a função para semear as categorias ---
+    seedDefaultCategories();
+
     console.log('✅ Banco de dados SQLite conectado e tabelas sincronizadas!');
     app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando na porta ${PORT}`);

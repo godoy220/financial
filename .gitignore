@@ -1,0 +1,8 @@
+# Ignora a pasta node_modules na raiz do projeto (boa prática padrão)
+/node_modules
+
+# Ignora a pasta node_modules DENTRO do subdiretório 'frontend'
+/frontend/node_modules
+
+# OPÇÃO AVANÇADA: Ignorar qualquer pasta node_modules, em qualquer lugar do projeto (mais seguro para este caso)
+# node_modules

@@ -40,7 +40,6 @@ router.post('/receipt', authenticateToken, upload.single('receipt'), (req, res) 
       return res.status(400).json({ error: 'Nenhum arquivo enviado' });
     }
 
-    // In a production environment, you would upload to cloud storage (AWS S3, etc.)
     const receiptUrl = `/uploads/${req.file.filename}`;
 
     res.json({

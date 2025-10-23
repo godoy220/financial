@@ -22,7 +22,6 @@ const Login = () => {
     setError('');
     setLoading(true);
 
-    // Basic client-side validation
     if (!email || !password) {
       setError('Por favor, preencha todos os campos');
       setLoading(false);
@@ -38,11 +37,6 @@ const Login = () => {
     setLoading(false);
   };
 
-  const handleInputChange = (setter) => (e) => {
-    setError('');
-    setter(e.target.value);
-  };
-
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -55,7 +49,7 @@ const Login = () => {
               type="email"
               id="email"
               value={email}
-              onChange={handleInputChange(setEmail)}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -65,7 +59,7 @@ const Login = () => {
               type="password"
               id="password"
               value={password}
-              onChange={handleInputChange(setPassword)}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
@@ -77,7 +71,7 @@ const Login = () => {
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-        <p>
+        <p style={{ textAlign: 'center', marginTop: '20px' }}>
           Não tem uma conta? <Link to="/register">Registre-se</Link>
         </p>
       </div>

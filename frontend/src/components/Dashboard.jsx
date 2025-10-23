@@ -69,9 +69,11 @@ const Dashboard = () => {
                   </span>
                 </div>
                 <div className="transaction-meta">
-                  <span className="category">{transaction.Category.name}</span>
+                  <span className="category" style={{ color: transaction.Category?.color }}>
+                    {transaction.Category?.name}
+                  </span>
                   <span className="date">
-                    {new Date(transaction.date).toLocaleDateString()}
+                    {new Date(transaction.date).toLocaleDateString('pt-BR')}
                   </span>
                 </div>
               </div>

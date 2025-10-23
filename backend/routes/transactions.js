@@ -2,6 +2,7 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const { Transaction, Category } = require('../models');
 const { authenticateToken } = require('../middleware/auth');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
