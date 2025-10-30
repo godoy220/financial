@@ -1,8 +1,15 @@
-# Ignora a pasta node_modules na raiz do projeto (boa prática padrão)
-/node_modules
-
-# Ignora a pasta node_modules DENTRO do subdiretório 'frontend'
+# Regra que já está aí
+node_modules/
 /frontend/node_modules
 
-# OPÇÃO AVANÇADA: Ignorar qualquer pasta node_modules, em qualquer lugar do projeto (mais seguro para este caso)
-# node_modules
+# NOVAS REGRAS ESSENCIAIS DE CACHE:
+.DS_Store
+npm-debug.log
+yarn-error.log
+.eslintcache
+.vscode/
+
+# Regra para ignorar caches do Vite/Next/etc dentro do frontend
+/frontend/dist
+/frontend/.vite
+/frontend/.next
