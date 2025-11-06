@@ -1,17 +1,11 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "password",
-    "database": "financial_system",
-    "host": "localhost",
+    "use_env_variable": "DEV_DATABASE_URL",
     "dialect": "postgres",
     "port": 5432
   },
   "test": {
-    "username": "postgres",
-    "password": "password",
-    "database": "financial_system_test",
-    "host": "localhost",
+    "use_env_variable": "TEST_DATABASE_URL",
     "dialect": "postgres"
   },
   "production": {

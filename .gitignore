@@ -2,6 +2,12 @@
 node_modules/
 /frontend/node_modules
 
+# ----------------------------------------------------------------------
+# SEGURANÇA CRÍTICA: Ignora todos os arquivos de variáveis de ambiente
+# (como .env, .env.development, .env.test, etc.) para evitar vazamento de segredos.
+# ----------------------------------------------------------------------
+*.env
+
 # NOVAS REGRAS ESSENCIAIS DE CACHE:
 .DS_Store
 npm-debug.log
